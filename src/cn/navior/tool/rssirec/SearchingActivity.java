@@ -169,11 +169,13 @@ public class SearchingActivity extends Activity {
                 try {
                 	searchRecordWriter = new PrintWriter( recordFile );
                 	searchRecordWriter.write( "Device name," + mBluetoothAdapter.getName() + "\n" );
+                    searchRecordWriter.write( "Device address," + mBluetoothAdapter.getAddress() + "\n" );
                 	searchRecordWriter.write( "Start time," + datetime + "\n" );
-                	searchRecordWriter.write( "name,mac,rssi,time\n" );
+                	searchRecordWriter.write( "search id,mac,name,rssi,time\n" );
                 	searchInfoWriter = new PrintWriter( infoFile );
                 	searchInfoWriter.write( "Device name," + mBluetoothAdapter.getName() + "\n" );
-                	searchInfoWriter.write( "Start time," + datetime + "\n" );
+                    searchInfoWriter.write( "Device address," + mBluetoothAdapter.getAddress() + "\n" );
+                    searchInfoWriter.write( "Start time," + datetime + "\n" );
                 	searchInfoWriter.write( "status,searchId,time\n" );
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -233,7 +235,7 @@ public class SearchingActivity extends Activity {
 		ArrayList< RecordItem > list = new ArrayList< RecordItem >( tempRecords.values() );
 		for( int i = 0; i < list.size(); i++ ) {
 			RecordItem item = list.get( i );
-			searchRecordWriter.write( item.getSearchId() + "," + item.getName() + "," + item.getMac() + "," + item.getRssi() + "," + item.getDatetime() + "\n" );
+			searchRecordWriter.write( item.getSearchId() + "," + item.getMac() + "," + item.getName() + "," + item.getRssi() + "," + item.getDatetime() + "\n" );
 		}
 		tempRecords.clear();
 	}
